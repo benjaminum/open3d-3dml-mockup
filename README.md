@@ -8,16 +8,16 @@ The file ```examples/inference_segmentation.py``` contains a working example sho
 ## Directories
 
 ```
-├─ examples             # place for example scripts and notebooks
-├─ docs                 # rst files that can be integrated in the open3d docs
-├─ ml3d                 # package root dir; this will become open3d/_ml3d in the package
-     ├─ datasets        # generic dataset code; will beopen3d.datasets
-     ├─ tf              # directory for tensorflow specific code. same structure as ml3d/torch
-     ├─ torch           # directory for pytorch specific code
-          ├─ datasets   # framework specific dataset code, e.g. wrappers that can make use of the generic dataset code.
-          │             # This will be open3d.ml.torch.datasets with open3d.ml.torch as ml3d
-          ├─ models     # modules with model code and/or packages for more complicated models.
-          ├─ pipelines  # pipelines with categories as subdirectories e.g. detection, segmentation
+├─ examples              # place for example scripts and notebooks
+├─ docs                  # rst files that can be integrated in the open3d docs
+├─ ml3d                  # package root dir; this will become open3d/_ml3d in the package
+     ├─ datasets         # generic dataset code; will beopen3d.datasets
+     ├─ tf               # directory for tensorflow specific code. same structure as ml3d/torch
+     ├─ torch            # directory for pytorch specific code
+          ├─ dataloaders # framework specific dataset code, e.g. wrappers that can make use of the generic dataset code.
+          │              # This will be open3d.ml.torch.datasets with open3d.ml.torch as ml3d
+          ├─ models      # modules with model code and/or packages for more complicated models.
+          ├─ pipelines   # pipelines with categories as subdirectories e.g. detection, segmentation
           
 ```
 
@@ -33,7 +33,7 @@ import open3d.ml.tf as ml3d
 
 # using ml3d
 net = ml3d.models.mynet(params)
-dataset = ml3d.datasets.ScanNet(params)
+dataset = ml3d.dataloaders.ScanNet(params)
 conv = ml3d.layers.ContinuousConv(params)
 ```
 
@@ -47,7 +47,7 @@ import ml3d.tf as ml3d
 
 # using ml3d
 net = ml3d.models.mynet(params)
-dataset = ml3d.datasets.ScanNet(params)
+dataset = ml3d.dataloaders.ScanNet(params)
 from open3d.ml.tf.layers import ContinuousConv; conv = ContinuousConv(params) # we don't need layers at the level of models and pipelines
 ```
 > Note that in this case ```ml3d``` will not behave exactly like the packaged version because ```ml3d.layers``` and other functionality from the main repo will be missing. 
