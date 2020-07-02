@@ -204,3 +204,16 @@ class ScanNet:
     def __len__(self):
         """Returns the number of scenes."""
         return len(self.scene_dirs)
+
+    @classmethod
+    def visualize(cls, data):
+        import siasainterface as si
+        labels = data['labels']
+        labels[labels > 40] = 0
+        label_colors = cls.nyu_colors[labels]
+
+        point_attributes = [
+                si.AttributeArray('Colors', data['colors']),
+                si.AttributeArray('Labels', label_colors),
+                ]
+        si.setPolyData(data['points'], data['scene_id'], point_attributes=point_attributes)
